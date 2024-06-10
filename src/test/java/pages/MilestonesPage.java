@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class MilestonesPage extends BasePage {
+    private final static By MESSAGE_TEXT = By.cssSelector("[data-testid='messageSuccessDivBox']");
+
     public MilestonesPage(WebDriver driver)
     {
         super(driver);
@@ -20,6 +22,6 @@ public class MilestonesPage extends BasePage {
     @Step("Get Expected Successful Message")
     public String getExpectedSuccessfulMessageMilestone()
     {
-        return driver.findElement(By.cssSelector("[data-testid='messageSuccessDivBox']")).getText();
+        return driver.findElement(MESSAGE_TEXT).getText();
     }
 }

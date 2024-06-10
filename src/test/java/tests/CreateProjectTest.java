@@ -18,13 +18,13 @@ public class CreateProjectTest extends BaseTest {
         addProjectPage.setNameProjectInput(projectName);
         addProjectPage.setTextInAnnouncementArea(announcementText);
         addProjectPage.checkCheckboxShowTheAnnouncement();
-        Assert.assertTrue(addProjectPage.isCheckboxShowTheAnnouncementChecked(),"Checkbox 'Show The Announcement' is unchecked");
+        Assert.assertTrue(addProjectPage.isCheckboxShowTheAnnouncementChecked(), "Checkbox 'Show The Announcement' is unchecked");
         addProjectPage.unCheckCheckboxShowTheAnnouncement();
-        Assert.assertFalse(addProjectPage.isCheckboxShowTheAnnouncementChecked(),"Checkbox 'Show The Announcement' is checked");
+        Assert.assertFalse(addProjectPage.isCheckboxShowTheAnnouncementChecked(), "Checkbox 'Show The Announcement' is checked");
         addProjectPage.selectRadioButtonUseASingleRepositoryWithBaseLineSupport();
-        Assert.assertTrue(addProjectPage.isRadioButtonUseASingleRepositoryWithBaseLineSupportSelected(),"RadioButton 'Use A Single Repository With BaseLine Support' is not selected");
+        Assert.assertTrue(addProjectPage.isRadioButtonUseASingleRepositoryWithBaseLineSupportSelected(), "RadioButton 'Use A Single Repository With BaseLine Support' is not selected");
         addProjectPage.checkCheckboxEnableTestCaseApprovals();
         addProjectPage.clickButtonAddProject();
-        Assert.assertTrue(administrationPage.isSidebarOverviewPresent(),"Sidebar 'Overview' is not present");
+        Assert.assertTrue(administrationPage.isSidebarOverviewPresent(), "Sidebar 'Overview' is not present");
     }
 }

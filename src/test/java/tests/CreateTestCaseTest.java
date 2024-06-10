@@ -9,9 +9,9 @@ public class CreateTestCaseTest extends BaseTest {
     @Description("this test checks successful creation of TestCase")
     public void positiveCreateTestCaseTest()
     {
-        String projectName = "NewProject1";
+        String projectName = "NewProject12";
         String announcementText = "AnnouncementArea testing";
-        String baselineName = "Version 1.0";
+        String baselineName = "Version 11.0";
         String baselineParentName = "Master";
         String title = "TestCaseTitle";
         String preconditions = "preconditions";
@@ -34,6 +34,6 @@ public class CreateTestCaseTest extends BaseTest {
         addTestCasePage.setTextSteps(steps);
         addTestCasePage.setTextExpectedResult(expectedResult);
         addTestCasePage.clickAddTestCaseButton();
-        Assert.assertEquals(testAddedPage.getExpectedSuccessfulMessage(), expectedMessage,"expected successful message is incorrect");
+        Assert.assertEquals(testAddedPage.getExpectedSuccessfulMessage(), expectedMessage, "expected successful message is incorrect");
     }
 }

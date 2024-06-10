@@ -9,6 +9,12 @@ public class AddProjectPage extends BasePage {
     private final static By NAME_PROJECT_INPUT = By.cssSelector("[data-testid='addProjectNameInput']");
     private final static By CHECKBOX_SHOW_THE_ANNOUNCEMENT = By.cssSelector("[data-testid='addEditProjectShowAnnouncement']");
     private final static By CHECKBOX_ENABLE_TEST_CASE_APPROVALS = By.cssSelector("[data-testid='addEditProjectCaseStatusesEnabled']");
+    private final static By TEXT_IN_ANNOUNCEMENT_AREA = By.cssSelector("[data-testid='addEditProjectAnnouncement']");
+    private final static By PROJECT_SUITE_MODE_SINGLE = By.cssSelector("[data-testid='addEditProjectSuiteModeSingle']");
+    private final static By PROJECT_SUITE_MODE_SINGLE_BASELINE = By.cssSelector("[data-testid='addEditProjectSuiteModeSingleBaseline']");
+    private final static By PROJECT_SUITE_MODE_MULTI = By.cssSelector("[data-testid='addEditProjectSuiteModeMulti']");
+    private final static By PROJECT_ADD_BUTTON = By.cssSelector("[data-testid='addEditProjectAddButton']");
+    private final static By PROJECT_CANCEL_BUTTON = By.cssSelector("[data-testid='addEditProjectCancelButton']");
 
     public AddProjectPage(WebDriver driver)
     {
@@ -25,16 +31,19 @@ public class AddProjectPage extends BasePage {
     {
         new InputDecorator(driver, NAME_PROJECT_INPUT).sendKeys(projectName);
     }
+
     @Step("Set Announcement = '{announcementText}'")
     public void setTextInAnnouncementArea(String announcementText)
     {
-        new TextAreaDecorator(driver, "addEditProjectAnnouncement").sendKeys(announcementText);
+        new TextAreaDecorator(driver, TEXT_IN_ANNOUNCEMENT_AREA).sendKeys(announcementText);
     }
+
     @Step("Check Checkbox 'Show The Announcement'")
     public void checkCheckboxShowTheAnnouncement()
     {
         new CheckboxDecorator(driver, CHECKBOX_SHOW_THE_ANNOUNCEMENT).check();
     }
+
     @Step("Uncheck Checkbox 'Show The Announcement'")
     public void unCheckCheckboxShowTheAnnouncement()
     {
@@ -45,6 +54,7 @@ public class AddProjectPage extends BasePage {
     {
         return new CheckboxDecorator(driver, CHECKBOX_SHOW_THE_ANNOUNCEMENT).isChecked();
     }
+
     @Step("Check Checkbox 'Enable TestCase Approvals'")
     public void checkCheckboxEnableTestCaseApprovals()
     {
@@ -63,34 +73,34 @@ public class AddProjectPage extends BasePage {
 
     public void selectRadioButtonUseASingleRepositoryForAllCases()
     {
-        new RadioButtonDecorator(driver, "addEditProjectSuiteModeSingle").select();
+        new RadioButtonDecorator(driver, PROJECT_SUITE_MODE_SINGLE).select();
     }
 
     public void selectRadioButtonUseASingleRepositoryWithBaseLineSupport()
     {
-        new RadioButtonDecorator(driver, "addEditProjectSuiteModeSingleBaseline").select();
+        new RadioButtonDecorator(driver, PROJECT_SUITE_MODE_SINGLE_BASELINE).select();
     }
 
     public boolean isRadioButtonUseASingleRepositoryWithBaseLineSupportSelected()
     {
-        return new RadioButtonDecorator(driver, "addEditProjectSuiteModeSingleBaseline").isSelected();
+        return new RadioButtonDecorator(driver, PROJECT_SUITE_MODE_SINGLE_BASELINE).isSelected();
     }
 
     public void selectRadiobuttonUseMultipleTestSuitesToManageCases()
     {
-        new RadioButtonDecorator(driver, "addEditProjectSuiteModeMulti").select();
+        new RadioButtonDecorator(driver, PROJECT_SUITE_MODE_MULTI).select();
     }
 
     @Step("Click the button 'Add Project'")
     public void clickButtonAddProject()
     {
-        new ButtonDecorator(driver, "addEditProjectAddButton").click();
+        new ButtonDecorator(driver, PROJECT_ADD_BUTTON).click();
     }
 
     @Step("Click the button 'Cancel'")
     public void clickButtonCancel()
     {
-        new ButtonDecorator(driver, "addEditProjectCancelButton").click();
+        new ButtonDecorator(driver, PROJECT_CANCEL_BUTTON).click();
     }
 
     @Step("Creating project '{projectName}'")

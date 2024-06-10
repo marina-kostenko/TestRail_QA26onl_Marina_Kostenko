@@ -5,6 +5,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class OverviewPage extends BasePage {
+
+    private final static By ADD_TESTSUITE_BUTTON = By.id("sidebar-suites-add");
+    private final static By ADD_MILESTONE_BUTTON = By.id("sidebar-milestones-add");
+
     public OverviewPage(WebDriver driver)
     {
         super(driver);
@@ -13,12 +17,12 @@ public class OverviewPage extends BasePage {
     @Step("Click the button 'Add Test Suite'")
     public void clickAddTestSuiteButton()
     {
-        driver.findElement(By.id("sidebar-suites-add")).click();
+        driver.findElement(ADD_TESTSUITE_BUTTON).click();
     }
 
     @Step("Click the button 'Add Milestone'")
     public void clickAddMilestoneButton()
     {
-        driver.findElement(By.id("sidebar-milestones-add")).click();
+        driver.findElement(ADD_MILESTONE_BUTTON).click();
     }
 }

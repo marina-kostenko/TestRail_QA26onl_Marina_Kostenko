@@ -17,11 +17,8 @@ public class LoginPage extends BasePage {
     @Step("Login with email = '{email}' and password = '{password}'")
     public void login(String email, String password)
     {
-        InputDecorator loginInput = new InputDecorator(driver, "loginIdName");
-        InputDecorator passwordInput = new InputDecorator(driver, "loginPasswordFormDialog");
-        ButtonDecorator logInButton = new ButtonDecorator(driver, "loginButtonPrimary");
-        loginInput.sendKeys(email);
-        passwordInput.sendKeys(password);
-        logInButton.click();
+        new InputDecorator(driver, "loginIdName").sendKeys(email);
+        new InputDecorator(driver, "loginPasswordFormDialog").sendKeys(password);
+        new ButtonDecorator(driver, "loginButtonPrimary").click();
     }
 }

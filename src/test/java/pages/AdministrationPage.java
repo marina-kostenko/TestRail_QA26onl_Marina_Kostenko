@@ -10,6 +10,8 @@ public class AdministrationPage extends BasePage {
 
     private final static By DASHBOARD_TAB = By.id("navigation-dashboard");
     private final static String PROJECT_CONTAINER = "//a[text()='%s']/ancestor::div[@class='table summary summary-auto']";
+    private final static By SIDEBAR_OVERVIEW = By.cssSelector("[data-testid='administrationSidebarOverview']");
+    private final static By NAME_PROJECT_LIST = By.cssSelector("a[href^='index.php?/projects/overview']");
 
     public AdministrationPage(WebDriver driver)
     {
@@ -18,7 +20,7 @@ public class AdministrationPage extends BasePage {
 
     public boolean isSidebarOverviewPresent()
     {
-        return driver.findElement(By.cssSelector("[data-testid='administrationSidebarOverview']")).isDisplayed();
+        return driver.findElement(SIDEBAR_OVERVIEW).isDisplayed();
     }
 
     @Step("Click the tab 'Dashboard'")
@@ -35,7 +37,7 @@ public class AdministrationPage extends BasePage {
     @Step("Click the name of  '{projectName}'")
     public void clickNameProject(String projectName)
     {
-        new ElementDecorator(driver, this.getProjectContainerByName(projectName).findElement(By.cssSelector("[style='padding-left: 25px']"))).click();
+        new ElementDecorator(driver, this.getProjectContainerByName(projectName).findElement(NAME_PROJECT_LIST)).click();
     }
 }
 

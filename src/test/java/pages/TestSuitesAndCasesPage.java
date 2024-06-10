@@ -9,6 +9,11 @@ import org.openqa.selenium.support.ui.Select;
 
 public class TestSuitesAndCasesPage extends BasePage {
     private final static String BASELINE_NAME = "//a[text()='%s']";
+    private final static By ADD_BASELINE_BUTTON = By.id("navigation-suites-addbaseline");
+    private final static By BASELINE_NAME_INPUT = By.id("addBaselineName");
+    private final static By BASELINE_PARENT = By.id("addBaselineParent");
+    private final static By BASELINE_SUBMIT_BUTTON = By.id("addBaselineSubmit");
+    private final static By CASE_ADD_BUTTON = By.cssSelector("[data-testid='sidebarCasesAdd']");
 
     public TestSuitesAndCasesPage(WebDriver driver)
     {
@@ -18,26 +23,26 @@ public class TestSuitesAndCasesPage extends BasePage {
     @Step("Click the button 'Add Baseline'")
     public void clickAddBaselineButton()
     {
-        new ButtonDecorator(driver, By.id("navigation-suites-addbaseline")).click();
+        new ButtonDecorator(driver, ADD_BASELINE_BUTTON).click();
     }
 
     @Step("Set Baseline Name = '{baselineName}'")
     public void setBaselineName(String baselineName)
     {
-        new InputDecorator(driver, By.id("addBaselineName")).sendKeys(baselineName);
+        new InputDecorator(driver, BASELINE_NAME_INPUT).sendKeys(baselineName);
     }
 
     @Step("Select Baseline Parent = '{baselineParentName}'")
     public void selectBaselineParent(String baselineParentName)
     {
-        Select select = new Select(driver.findElement(By.id("addBaselineParent")));
+        Select select = new Select(driver.findElement(BASELINE_PARENT));
         select.selectByVisibleText(baselineParentName);
     }
 
     @Step("Click the submit-button 'Add Baseline'")
     public void clickAddBaselineSubmitButton()
     {
-        new ButtonDecorator(driver, By.id("addBaselineSubmit")).click();
+        new ButtonDecorator(driver, BASELINE_SUBMIT_BUTTON).click();
     }
 
     @Step("Click the name of '{baselineName}'")
@@ -49,6 +54,6 @@ public class TestSuitesAndCasesPage extends BasePage {
     @Step("Click the button 'Add Cases'")
     public void clickAddCasesButton()
     {
-        new ButtonDecorator(driver, "sidebarCasesAdd").click();
+        new ButtonDecorator(driver, CASE_ADD_BUTTON).click();
     }
 }

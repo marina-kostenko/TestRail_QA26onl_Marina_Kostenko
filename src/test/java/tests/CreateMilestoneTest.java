@@ -5,11 +5,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class CreateMilestoneTest extends BaseTest {
-    @Test(groups = {"need account"},description ="positive Create Milestone Test" )
+    @Test(groups = {"need account"}, description = "positive Create Milestone Test")
     @Description("this test checks successful creation of milestone")
     public void positiveCreateMilestoneTest()
     {
-        String projectName = "NewProject";
+        String projectName = "NewProject1";
         String announcementText = "AnnouncementArea testing";
         String milestoneName = "NewMilestone";
         String reference = "Reference";
