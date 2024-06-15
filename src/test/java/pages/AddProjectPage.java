@@ -4,6 +4,7 @@ import decorators.*;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class AddProjectPage extends BasePage {
     private final static By NAME_PROJECT_INPUT = By.cssSelector("[data-testid='addProjectNameInput']");
@@ -19,6 +20,12 @@ public class AddProjectPage extends BasePage {
     public AddProjectPage(WebDriver driver)
     {
         super(driver);
+    }
+
+    @Override
+    public void isOpen()
+    {
+        wait.until(ExpectedConditions.elementToBeClickable(PROJECT_ADD_BUTTON));
     }
 
     public boolean isNameProjectInputPresent()

@@ -5,6 +5,7 @@ import decorators.InputDecorator;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 public class TestSuitesAndCasesPage extends BasePage {
@@ -13,11 +14,17 @@ public class TestSuitesAndCasesPage extends BasePage {
     private final static By BASELINE_NAME_INPUT = By.id("addBaselineName");
     private final static By BASELINE_PARENT = By.id("addBaselineParent");
     private final static By BASELINE_SUBMIT_BUTTON = By.id("addBaselineSubmit");
-    private final static By CASE_ADD_BUTTON = By.cssSelector("[data-testid='sidebarCasesAdd']");
+    private final static By TESTCASE_ADD_BUTTON = By.cssSelector("[data-testid='sidebarCasesAdd']");
 
     public TestSuitesAndCasesPage(WebDriver driver)
     {
         super(driver);
+    }
+
+    @Override
+    public void isOpen()
+    {
+        wait.until(ExpectedConditions.elementToBeClickable(TESTCASE_ADD_BUTTON));
     }
 
     @Step("Click the button 'Add Baseline'")
@@ -54,6 +61,6 @@ public class TestSuitesAndCasesPage extends BasePage {
     @Step("Click the button 'Add Cases'")
     public void clickAddCasesButton()
     {
-        new ButtonDecorator(driver, CASE_ADD_BUTTON).click();
+        new ButtonDecorator(driver, TESTCASE_ADD_BUTTON).click();
     }
 }

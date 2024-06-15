@@ -32,7 +32,7 @@ public abstract class BaseTest {
     {
         driver = DriverFactory.getDriver(browser);
         testContext.setAttribute("driver", driver);
-        driver.get("https://marinakostenko.testrail.io/");
+        driver.get("https://tmsqa26online2024new.testrail.io/");
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         this.loginPage = new LoginPage(driver);
         this.dashboardPage = new DashboardPage(driver);
@@ -50,7 +50,7 @@ public abstract class BaseTest {
     @Parameters({"email", "password"})
     public void setAccount(@Optional("defaultEmail") String email, @Optional("defaultPassword") String password)
     {
-        loginPage.login("89marisha@gmail.com", "7Qwertyuiop!");
+        loginPage.login("tmsqa26marina@mailinator.com", "xl#H3R0Vu0");
     }
 
 

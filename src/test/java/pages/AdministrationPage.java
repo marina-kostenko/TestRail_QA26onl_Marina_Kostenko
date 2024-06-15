@@ -5,6 +5,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class AdministrationPage extends BasePage {
 
@@ -16,6 +17,12 @@ public class AdministrationPage extends BasePage {
     public AdministrationPage(WebDriver driver)
     {
         super(driver);
+    }
+
+    @Override
+    public void isOpen()
+    {
+        wait.until(ExpectedConditions.elementToBeClickable(SIDEBAR_OVERVIEW));
     }
 
     public boolean isSidebarOverviewPresent()

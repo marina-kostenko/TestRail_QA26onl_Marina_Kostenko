@@ -6,6 +6,7 @@ import decorators.TextAreaDecorator;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class AddTestCasePage extends BasePage {
 
@@ -14,10 +15,17 @@ public class AddTestCasePage extends BasePage {
     private final By CUSTOM_STEPS_TEXTAREA = By.cssSelector("[data-attr='custom_steps']");
     private final By CUSTOM_EXPECTED_TEXTAREA = By.cssSelector("[data-attr='custom_expected']");
     private final String testCaseButton = "addTestCaseButton";
+    private final By CANCEL_TESTCASE_BUTTON = By.cssSelector("[data-testid='addEditCaseCancelButton']");
 
     public AddTestCasePage(WebDriver driver)
     {
         super(driver);
+    }
+
+    @Override
+    public void isOpen()
+    {
+        wait.until(ExpectedConditions.elementToBeClickable(CANCEL_TESTCASE_BUTTON));
     }
 
     @Step("Set Title = '{title}'")
