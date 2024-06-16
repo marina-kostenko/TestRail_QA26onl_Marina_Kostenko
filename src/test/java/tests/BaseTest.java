@@ -25,6 +25,9 @@ public abstract class BaseTest {
     protected TestAddedPage testAddedPage;
     protected AddMilestonePage addMilestonePage;
     protected MilestonesPage milestonesPage;
+    protected static final String BASE_URL = "https://tmsqa26online2024new.testrail.io/";
+    protected static final String BASE_LOGIN = "tmsqa26marina@mailinator.com";
+    protected static final String BASE_PASSWORD = "xl#H3R0Vu0";
 
     @BeforeMethod(alwaysRun = true)
     @Parameters({"browserName"})
@@ -32,7 +35,7 @@ public abstract class BaseTest {
     {
         driver = DriverFactory.getDriver(browser);
         testContext.setAttribute("driver", driver);
-        driver.get("https://tmsqa26online2024new.testrail.io/");
+        driver.get(BASE_URL);
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         this.loginPage = new LoginPage(driver);
         this.dashboardPage = new DashboardPage(driver);
@@ -50,7 +53,7 @@ public abstract class BaseTest {
     @Parameters({"email", "password"})
     public void setAccount(@Optional("defaultEmail") String email, @Optional("defaultPassword") String password)
     {
-        loginPage.login("tmsqa26marina@mailinator.com", "xl#H3R0Vu0");
+        loginPage.login(BASE_LOGIN, BASE_PASSWORD);
     }
 
 
