@@ -5,9 +5,12 @@ import decorators.CheckboxDecorator;
 import decorators.InputDecorator;
 import decorators.TextAreaDecorator;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class AddMilestonePage extends BasePage {
+    private final static By CANCEL_MILESTONE_BUTTON = By.cssSelector("[data-testid='milestoneButtonCancel']");
     private final String milestoneNameInput = "addEditMilestoneName";
     private final String milestoneReferenceInput = "addEditMilestoneReference";
     private final String sectionDescriptionTextArea = "editSectionDescription";
@@ -17,6 +20,12 @@ public class AddMilestonePage extends BasePage {
     public AddMilestonePage(WebDriver driver)
     {
         super(driver);
+    }
+
+    @Override
+    public void isOpen()
+    {
+        wait.until(ExpectedConditions.elementToBeClickable(CANCEL_MILESTONE_BUTTON));
     }
 
     @Step("Set Milestone Name = '{milestoneName}'")

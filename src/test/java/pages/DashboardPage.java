@@ -4,6 +4,7 @@ import decorators.ButtonDecorator;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class DashboardPage extends BasePage {
     private final static By ADD_PROJECT_SIDEBAR_BUTTON = By.id("sidebar-projects-add");
@@ -11,6 +12,12 @@ public class DashboardPage extends BasePage {
     public DashboardPage(WebDriver driver)
     {
         super(driver);
+    }
+
+    @Override
+    public void isOpen()
+    {
+        wait.until(ExpectedConditions.elementToBeClickable(ADD_PROJECT_SIDEBAR_BUTTON));
     }
 
     public boolean isAddProjectSidebarButtonPresent()
