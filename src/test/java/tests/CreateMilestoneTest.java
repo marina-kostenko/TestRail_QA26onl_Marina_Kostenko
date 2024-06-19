@@ -1,6 +1,9 @@
 package tests;
 
+import enums.ProjectType;
 import io.qameta.allure.Description;
+import models.Milestone;
+import models.Project;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.GenerateData;
@@ -13,24 +16,43 @@ public class CreateMilestoneTest extends BaseTest {
         String projectName = GenerateData.generateProjectName();
         String announcementText = GenerateData.generateAnnouncementText();
         String milestoneName = "NewMilestone";
-        String reference = "Reference";
-        String description = "Description";
+        String reference = "Refer";
+        String description = "Descrip";
+        String startDate = "6/17/2024";
+        String endDate = "6/17/2025";
         String expectedMessage = "Successfully added the new milestone.";
         dashboardPage.isOpen();
         dashboardPage.clickAddProjectButton();
         addProjectPage.isOpen();
-        addProjectPage.addProject(projectName, announcementText);
-        administrationPage.isOpen();
-        administrationPage.clickDashboardTab();
-        administrationPage.clickNameProject(projectName);
-        overviewPage.clickAddMilestoneButton();
+        Project testProject = new Project.ProjectBuilder(projectName)
+                .withAnnouncement(announcementText)
+                .setShowAnnouncement(true)
+                .withProjectType(ProjectType.SINGLE_REPO_FOR_ALL_CASES)
+                .setEnableTestCaseApprovals(true)
+                .build();
+        addProjectPage.addProject(testProject);
+        projectsAddedPage.isOpen();
+        projectsAddedPage.clickDashboardTab();
+        dashboardPage.isOpen();
+        dashboardPage.clickNameProject(projectName);
+        overviewProjectPage.isOpen();
+        overviewProjectPage.clickAddMilestoneButton();
         addMilestonePage.isOpen();
-        addMilestonePage.setMilestoneName(milestoneName);
-        addMilestonePage.setReference(reference);
-        addMilestonePage.setDescriptionText(description);
-        addMilestonePage.checkCheckboxThisMilestoneIsCompleted();
-        addMilestonePage.clickAddMilestoneButton();
+        Milestone testMilestone = Milestone.builder()
+                .setName(milestoneName)
+                .setReferences(reference)
+                .setDescription(description)
+                .setStartDate(startDate)
+                .setEndDate(endDate)
+                .setMilestoneCompleted(true)
+                .build();
+        addMilestonePage.addMilestone(testMilestone);
         milestonesPage.isOpen();
         Assert.assertEquals(milestonesPage.getExpectedSuccessfulMessageMilestone(), expectedMessage);
+        milestonesPage.clickNameMilestone(milestoneName);
+        milestoneDetailsPage.isOpen();
+        Assert.assertTrue(milestoneDetailsPage.isStartMilestoneButtonPresent());
+        Milestone actualMilestone = milestoneDetailsPage.getMilestoneInfo();
+        Assert.assertEquals(actualMilestone, testMilestone);
     }
 }

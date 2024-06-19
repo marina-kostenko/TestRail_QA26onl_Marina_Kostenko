@@ -1,6 +1,8 @@
 package tests;
 
+import enums.ProjectType;
 import io.qameta.allure.Description;
+import models.Project;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -15,20 +17,25 @@ public class CreateProjectTest extends BaseTest {
     {
         String projectName = GenerateData.generateProjectName();
         String announcementText = GenerateData.generateAnnouncementText();
+        String expectedMessage = "Successfully added the new project.";
         dashboardPage.isOpen();
         dashboardPage.clickAddProjectButton();
         addProjectPage.isOpen();
-        addProjectPage.setNameProjectInput(projectName);
-        addProjectPage.setTextInAnnouncementArea(announcementText);
-        addProjectPage.checkCheckboxShowTheAnnouncement();
-        Assert.assertTrue(addProjectPage.isCheckboxShowTheAnnouncementChecked(), "Checkbox 'Show The Announcement' is unchecked");
-        addProjectPage.unCheckCheckboxShowTheAnnouncement();
-        Assert.assertFalse(addProjectPage.isCheckboxShowTheAnnouncementChecked(), "Checkbox 'Show The Announcement' is checked");
-        addProjectPage.selectRadioButtonUseASingleRepositoryWithBaseLineSupport();
-        Assert.assertTrue(addProjectPage.isRadioButtonUseASingleRepositoryWithBaseLineSupportSelected(), "RadioButton 'Use A Single Repository With BaseLine Support' is not selected");
-        addProjectPage.checkCheckboxEnableTestCaseApprovals();
-        addProjectPage.clickButtonAddProject();
-        administrationPage.isOpen();
-        Assert.assertTrue(administrationPage.isSidebarOverviewPresent(), "Sidebar 'Overview' is not present");
+        Project testProject = new Project.ProjectBuilder(projectName)
+                .withAnnouncement(announcementText)
+                .setShowAnnouncement(true)
+                .withProjectType(ProjectType.SINGLE_REPO_FOR_ALL_CASES)
+                .setEnableTestCaseApprovals(true)
+                .build();
+        addProjectPage.addProject(testProject);
+        projectsAddedPage.isOpen();
+        Assert.assertEquals(projectsAddedPage.getExpectedSuccessfulMessage(), expectedMessage, "message is incorrect or doesn't exist");
+        Assert.assertTrue(projectsAddedPage.isProjectAdded(projectName), "project doesn't exist");
+        projectsAddedPage.clickDashboardTab();
+        dashboardPage.isOpen();
+        dashboardPage.clickNameProject(projectName);
+        overviewProjectPage.isOpen();
+        Project actualProject = overviewProjectPage.getProjectInfo();
+        Assert.assertEquals(actualProject, testProject, "test project differs from actual project");
     }
 }

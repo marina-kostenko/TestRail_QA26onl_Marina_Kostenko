@@ -34,4 +34,9 @@ public class TextAreaDecorator extends ElementDecorator {
         Actions actions = new Actions(driver);
         actions.sendKeys(this.element, Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE);
     }
+
+    public void setValue(String value)
+    {
+        this.element.sendKeys(value);
+    }
 }

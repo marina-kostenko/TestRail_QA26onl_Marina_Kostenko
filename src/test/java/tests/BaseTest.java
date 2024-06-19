@@ -13,21 +13,23 @@ import java.time.Duration;
 
 @Listeners({InvokedListener.class, TestListener.class})
 public abstract class BaseTest {
+    protected static final String BASE_URL = "https://tmsqa26online2024new.testrail.io/";
+    protected static final String BASE_LOGIN = "tmsqa26marina@mailinator.com";
+    protected static final String BASE_PASSWORD = "xl#H3R0Vu0";
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected LoginPage loginPage;
     protected DashboardPage dashboardPage;
     protected AddProjectPage addProjectPage;
-    protected OverviewPage overviewPage;
+    protected OverviewProjectPage overviewProjectPage;
     protected AdministrationPage administrationPage;
     protected TestSuitesAndCasesPage testSuitesAndCasesPage;
     protected AddTestCasePage addTestCasePage;
     protected TestAddedPage testAddedPage;
     protected AddMilestonePage addMilestonePage;
     protected MilestonesPage milestonesPage;
-    protected static final String BASE_URL = "https://tmsqa26online2024new.testrail.io/";
-    protected static final String BASE_LOGIN = "tmsqa26marina@mailinator.com";
-    protected static final String BASE_PASSWORD = "xl#H3R0Vu0";
+    protected ProjectsAddedPage projectsAddedPage;
+    protected MilestoneDetailsPage milestoneDetailsPage;
 
     @BeforeMethod(alwaysRun = true)
     @Parameters({"browserName"})
@@ -40,13 +42,15 @@ public abstract class BaseTest {
         this.loginPage = new LoginPage(driver);
         this.dashboardPage = new DashboardPage(driver);
         this.addProjectPage = new AddProjectPage(driver);
-        this.overviewPage = new OverviewPage(driver);
+        this.overviewProjectPage = new OverviewProjectPage(driver);
         this.administrationPage = new AdministrationPage(driver);
         this.testSuitesAndCasesPage = new TestSuitesAndCasesPage(driver);
         this.addTestCasePage = new AddTestCasePage(driver);
         this.testAddedPage = new TestAddedPage(driver);
         this.addMilestonePage = new AddMilestonePage(driver);
         this.milestonesPage = new MilestonesPage(driver);
+        this.projectsAddedPage = new ProjectsAddedPage(driver);
+        this.milestoneDetailsPage = new MilestoneDetailsPage(driver);
     }
 
     @BeforeMethod(alwaysRun = true, onlyForGroups = {"need account"}, dependsOnMethods = "setUp")

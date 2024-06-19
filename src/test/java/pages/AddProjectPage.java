@@ -2,6 +2,7 @@ package pages;
 
 import decorators.*;
 import io.qameta.allure.Step;
+import models.Project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,9 +12,6 @@ public class AddProjectPage extends BasePage {
     private final static By CHECKBOX_SHOW_THE_ANNOUNCEMENT = By.cssSelector("[data-testid='addEditProjectShowAnnouncement']");
     private final static By CHECKBOX_ENABLE_TEST_CASE_APPROVALS = By.cssSelector("[data-testid='addEditProjectCaseStatusesEnabled']");
     private final static By TEXT_IN_ANNOUNCEMENT_AREA = By.cssSelector("[data-testid='addEditProjectAnnouncement']");
-    private final static By PROJECT_SUITE_MODE_SINGLE = By.cssSelector("[data-testid='addEditProjectSuiteModeSingle']");
-    private final static By PROJECT_SUITE_MODE_SINGLE_BASELINE = By.cssSelector("[data-testid='addEditProjectSuiteModeSingleBaseline']");
-    private final static By PROJECT_SUITE_MODE_MULTI = By.cssSelector("[data-testid='addEditProjectSuiteModeMulti']");
     private final static By PROJECT_ADD_BUTTON = By.cssSelector("[data-testid='addEditProjectAddButton']");
     private final static By PROJECT_CANCEL_BUTTON = By.cssSelector("[data-testid='addEditProjectCancelButton']");
 
@@ -68,35 +66,6 @@ public class AddProjectPage extends BasePage {
         new CheckboxDecorator(driver, CHECKBOX_ENABLE_TEST_CASE_APPROVALS).check();
     }
 
-    public void unCheckCheckboxEnableTestCaseApprovals()
-    {
-        new CheckboxDecorator(driver, CHECKBOX_ENABLE_TEST_CASE_APPROVALS).uncheck();
-    }
-
-    public boolean isCheckboxEnableTestCaseApprovalsChecked()
-    {
-        return new CheckboxDecorator(driver, CHECKBOX_ENABLE_TEST_CASE_APPROVALS).isChecked();
-    }
-
-    public void selectRadioButtonUseASingleRepositoryForAllCases()
-    {
-        new RadioButtonDecorator(driver, PROJECT_SUITE_MODE_SINGLE).select();
-    }
-
-    public void selectRadioButtonUseASingleRepositoryWithBaseLineSupport()
-    {
-        new RadioButtonDecorator(driver, PROJECT_SUITE_MODE_SINGLE_BASELINE).select();
-    }
-
-    public boolean isRadioButtonUseASingleRepositoryWithBaseLineSupportSelected()
-    {
-        return new RadioButtonDecorator(driver, PROJECT_SUITE_MODE_SINGLE_BASELINE).isSelected();
-    }
-
-    public void selectRadiobuttonUseMultipleTestSuitesToManageCases()
-    {
-        new RadioButtonDecorator(driver, PROJECT_SUITE_MODE_MULTI).select();
-    }
 
     @Step("Click the button 'Add Project'")
     public void clickButtonAddProject()
@@ -110,14 +79,18 @@ public class AddProjectPage extends BasePage {
         new ButtonDecorator(driver, PROJECT_CANCEL_BUTTON).click();
     }
 
-    @Step("Creating project '{projectName}'")
-    public void addProject(String projectName, String announcementText)
+    @Step("Creating project '{projectName}' with announcement: '{project.announcement}' and type: '{project.projectType}'")
+    public void addProject(Project project)
     {
-        setNameProjectInput(projectName);
-        setTextInAnnouncementArea(announcementText);
-        checkCheckboxShowTheAnnouncement();
-        selectRadioButtonUseASingleRepositoryWithBaseLineSupport();
-        checkCheckboxEnableTestCaseApprovals();
+        new InputDecorator(driver, NAME_PROJECT_INPUT).setValue(project.getName());
+        new TextAreaDecorator(driver, TEXT_IN_ANNOUNCEMENT_AREA).setValue(project.getAnnouncement());
+        if (project.isShowAnnouncement()) {
+            checkCheckboxShowTheAnnouncement();
+        }
+        new RadioButtonDecorator(driver, project.getProjectType().getDataTestId()).select();
+        if (project.isEnableTestCaseApprovals()) {
+            checkCheckboxEnableTestCaseApprovals();
+        }
         clickButtonAddProject();
     }
 }

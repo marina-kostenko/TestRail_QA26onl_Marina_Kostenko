@@ -1,6 +1,9 @@
 package tests;
 
+import enums.*;
 import io.qameta.allure.Description;
+import models.Project;
+import models.TestCase;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.GenerateData;
@@ -12,7 +15,9 @@ public class CreateTestCaseTest extends BaseTest {
     {
         String projectName = GenerateData.generateProjectName();
         String announcementText = GenerateData.generateAnnouncementText();
-        String title = "TestCaseTitle";
+        String title = "CaseTitle";
+        String estimate = "20";
+        String references = "Refers";
         String preconditions = "preconditions";
         String steps = "steps";
         String expectedResult = "expectedResult";
@@ -20,19 +25,37 @@ public class CreateTestCaseTest extends BaseTest {
         dashboardPage.isOpen();
         dashboardPage.clickAddProjectButton();
         addProjectPage.isOpen();
-        addProjectPage.addProject(projectName, announcementText);
-        administrationPage.isOpen();
-        administrationPage.clickDashboardTab();
-        administrationPage.clickNameProject(projectName);
-        overviewPage.isOpen();
-        overviewPage.clickAddTestCaseButton();
+        Project testProject = new Project.ProjectBuilder(projectName)
+                .withAnnouncement(announcementText)
+                .setShowAnnouncement(true)
+                .withProjectType(ProjectType.SINGLE_REPO_FOR_ALL_CASES)
+                .setEnableTestCaseApprovals(true)
+                .build();
+        addProjectPage.addProject(testProject);
+        projectsAddedPage.isOpen();
+        projectsAddedPage.clickDashboardTab();
+        dashboardPage.isOpen();
+        dashboardPage.clickNameProject(projectName);
+        overviewProjectPage.isOpen();
+        overviewProjectPage.clickAddTestCaseButton();
         addTestCasePage.isOpen();
-        addTestCasePage.setTitle(title);
-        addTestCasePage.setTextPreconditions(preconditions);
-        addTestCasePage.setTextSteps(steps);
-        addTestCasePage.setTextExpectedResult(expectedResult);
-        addTestCasePage.clickAddTestCaseButton();
+        TestCase testTestcase = new TestCase.TestCaseBuilder(title)
+                .setTemplateTestCaseType(TemplateTestCaseType.TEST_CASE_TEXT)
+                .setTypeTestCase(TypeTestCase.AUTOMATED)
+                .setPriorityTestCase(PriorityTestCase.HIGH)
+                .setStatusTestCase(StatusTestCase.READY)
+                .setAssignedTestCase(AssignedTestCase.NONE)
+                .setEstimate(estimate)
+                .setReferences(references)
+                .setAutomationTypeTestCase(AutomationTypeTestCase.NONE)
+                .setPreconditions(preconditions)
+                .setSteps(steps)
+                .setExpectedResults(expectedResult)
+                .build();
+        addTestCasePage.addTestCase(testTestcase);
         testAddedPage.isOpen();
         Assert.assertEquals(testAddedPage.getExpectedSuccessfulMessage(), expectedMessage, "expected successful message is incorrect");
+        TestCase actualTestCase = testAddedPage.getTestCaseInfo();
+        Assert.assertEquals(actualTestCase, testTestcase, " testTestcase differs from actualTestCase");
     }
 }

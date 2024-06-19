@@ -14,6 +14,11 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
+    @Override
+    public void isOpen()
+    {
+    }
+
     @Step("Login with email = '{email}' and password = '{password}'")
     public void login(String email, String password)
     {
