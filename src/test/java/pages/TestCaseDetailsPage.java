@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class TestAddedPage extends BasePage {
+public class TestCaseDetailsPage extends BasePage {
     private final static By MESSAGE_TEXT = By.cssSelector("[data-testid='messageSuccessDivBox']");
     private final static By EDIT_BUTTON = By.cssSelector("[data-testid='testCaseEditButton']");
     private final static By ACTUAL_TITLE = By.cssSelector("[data-testid='testCaseContentHeaderTitle']");
@@ -18,11 +18,11 @@ public class TestAddedPage extends BasePage {
     private final static By ACTUAL_ESTIMATE = By.id("cell_estimate");
     private final static By ACTUAL_REFERENCES = By.id("cell_refs");
     private final static By ACTUAL_AUTOMATION_TYPE = By.id("cell_custom_automation_type");
-    private final static By ACTUAL_PRECONDITIONS = By.xpath("//div[@class='field-content'][1]");
-    private final static By ACTUAL_STEPS = By.xpath("//div[@class='field-content'][2]");
-    private final static By ACTUAL_EXPECTED_RESULTS = By.xpath("//div[@class='field-content'][3]");
+    private final static By ACTUAL_PRECONDITIONS = By.xpath("//*[text()='Preconditions']//following::p");
+    private final static By ACTUAL_STEPS = By.xpath("//*[text()='Steps']//following::p");
+    private final static By ACTUAL_EXPECTED_RESULTS = By.xpath("//*[text()='Expected Result']//following::p");
 
-    public TestAddedPage(WebDriver driver)
+    public TestCaseDetailsPage(WebDriver driver)
     {
         super(driver);
     }

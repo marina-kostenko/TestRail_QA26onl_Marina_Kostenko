@@ -9,7 +9,7 @@ public class MilestoneDetailsPage extends BasePage {
 
     private final static By START_MILESTONE_BUTTON = By.id("navigation-milestones-start");
     private final static By ACTUAL_NAME_MILESTONE = By.cssSelector("[data-testid='testCaseContentHeaderTitle']");
-    private final static By ACTUAL_DESC_MILESTONE = By.xpath("//div[@class='markdown '][1]");
+    private final static By ACTUAL_DESC_MILESTONE = By.xpath("//*[@data-testid='markdown']//following::p");
 
     public MilestoneDetailsPage(WebDriver driver)
     {

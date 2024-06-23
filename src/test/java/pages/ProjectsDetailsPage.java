@@ -5,13 +5,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class ProjectsAddedPage extends BasePage {
+public class ProjectsDetailsPage extends BasePage {
     private final static By DASHBOARD_TAB = By.id("navigation-dashboard");
     private final static String PROJECT_ADDED_NAME = "//table[@class='grid']/descendant::a[text()='%s']";
     private final static By SIDEBAR_OVERVIEW = By.cssSelector("[data-testid='administrationSidebarOverview']");
     private final static By MESSAGE_TEXT = By.cssSelector("[data-testid='messageSuccessDivBox']");
 
-    public ProjectsAddedPage(WebDriver driver)
+    public ProjectsDetailsPage(WebDriver driver)
     {
         super(driver);
     }

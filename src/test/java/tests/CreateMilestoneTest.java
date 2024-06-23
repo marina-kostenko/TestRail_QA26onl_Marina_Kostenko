@@ -31,8 +31,8 @@ public class CreateMilestoneTest extends BaseTest {
                 .setEnableTestCaseApprovals(true)
                 .build();
         addProjectPage.addProject(testProject);
-        projectsAddedPage.isOpen();
-        projectsAddedPage.clickDashboardTab();
+        projectsDetailsPage.isOpen();
+        projectsDetailsPage.clickDashboardTab();
         dashboardPage.isOpen();
         dashboardPage.clickNameProject(projectName);
         overviewProjectPage.isOpen();

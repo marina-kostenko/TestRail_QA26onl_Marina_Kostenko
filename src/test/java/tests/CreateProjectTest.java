@@ -28,10 +28,10 @@ public class CreateProjectTest extends BaseTest {
                 .setEnableTestCaseApprovals(true)
                 .build();
         addProjectPage.addProject(testProject);
-        projectsAddedPage.isOpen();
-        Assert.assertEquals(projectsAddedPage.getExpectedSuccessfulMessage(), expectedMessage, "message is incorrect or doesn't exist");
-        Assert.assertTrue(projectsAddedPage.isProjectAdded(projectName), "project doesn't exist");
-        projectsAddedPage.clickDashboardTab();
+        projectsDetailsPage.isOpen();
+        Assert.assertEquals(projectsDetailsPage.getExpectedSuccessfulMessage(), expectedMessage, "message is incorrect or doesn't exist");
+        Assert.assertTrue(projectsDetailsPage.isProjectAdded(projectName), "project doesn't exist");
+        projectsDetailsPage.clickDashboardTab();
         dashboardPage.isOpen();
         dashboardPage.clickNameProject(projectName);
         overviewProjectPage.isOpen();

@@ -32,8 +32,8 @@ public class CreateTestCaseTest extends BaseTest {
                 .setEnableTestCaseApprovals(true)
                 .build();
         addProjectPage.addProject(testProject);
-        projectsAddedPage.isOpen();
-        projectsAddedPage.clickDashboardTab();
+        projectsDetailsPage.isOpen();
+        projectsDetailsPage.clickDashboardTab();
         dashboardPage.isOpen();
         dashboardPage.clickNameProject(projectName);
         overviewProjectPage.isOpen();
@@ -53,9 +53,9 @@ public class CreateTestCaseTest extends BaseTest {
                 .setExpectedResults(expectedResult)
                 .build();
         addTestCasePage.addTestCase(testTestcase);
-        testAddedPage.isOpen();
-        Assert.assertEquals(testAddedPage.getExpectedSuccessfulMessage(), expectedMessage, "expected successful message is incorrect");
-        TestCase actualTestCase = testAddedPage.getTestCaseInfo();
+        testCaseDetailsPage.isOpen();
+        Assert.assertEquals(testCaseDetailsPage.getExpectedSuccessfulMessage(), expectedMessage, "expected successful message is incorrect");
+        TestCase actualTestCase = testCaseDetailsPage.getTestCaseInfo();
         Assert.assertEquals(actualTestCase, testTestcase, " testTestcase differs from actualTestCase");
     }
 }

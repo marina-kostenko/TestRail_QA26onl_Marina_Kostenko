@@ -25,10 +25,10 @@ public abstract class BaseTest {
     protected AdministrationPage administrationPage;
     protected TestSuitesAndCasesPage testSuitesAndCasesPage;
     protected AddTestCasePage addTestCasePage;
-    protected TestAddedPage testAddedPage;
+    protected TestCaseDetailsPage testCaseDetailsPage;
     protected AddMilestonePage addMilestonePage;
     protected MilestonesPage milestonesPage;
-    protected ProjectsAddedPage projectsAddedPage;
+    protected ProjectsDetailsPage projectsDetailsPage;
     protected MilestoneDetailsPage milestoneDetailsPage;
 
     @BeforeMethod(alwaysRun = true)
@@ -46,10 +46,10 @@ public abstract class BaseTest {
         this.administrationPage = new AdministrationPage(driver);
         this.testSuitesAndCasesPage = new TestSuitesAndCasesPage(driver);
         this.addTestCasePage = new AddTestCasePage(driver);
-        this.testAddedPage = new TestAddedPage(driver);
+        this.testCaseDetailsPage = new TestCaseDetailsPage(driver);
         this.addMilestonePage = new AddMilestonePage(driver);
         this.milestonesPage = new MilestonesPage(driver);
-        this.projectsAddedPage = new ProjectsAddedPage(driver);
+        this.projectsDetailsPage = new ProjectsDetailsPage(driver);
         this.milestoneDetailsPage = new MilestoneDetailsPage(driver);
     }
 
