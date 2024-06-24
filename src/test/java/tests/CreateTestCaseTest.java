@@ -40,7 +40,7 @@ public class CreateTestCaseTest extends BaseTest {
         overviewProjectPage.clickAddTestCaseButton();
         addTestCasePage.isOpen();
         TestCase testTestcase = new TestCase.TestCaseBuilder(title)
-                .setTemplateTestCaseType(TemplateTestCaseType.TEST_CASE_TEXT)
+                // .setTemplateTestCaseType(TemplateTestCaseType.TEST_CASE_TEXT)
                 .setTypeTestCase(TypeTestCase.AUTOMATED)
                 .setPriorityTestCase(PriorityTestCase.HIGH)
                 .setStatusTestCase(StatusTestCase.READY)

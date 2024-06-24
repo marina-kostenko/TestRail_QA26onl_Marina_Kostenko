@@ -2,11 +2,13 @@ package pages;
 
 import decorators.*;
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import models.Project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+@Log4j2
 public class AddProjectPage extends BasePage {
     private final static By NAME_PROJECT_INPUT = By.cssSelector("[data-testid='addProjectNameInput']");
     private final static By CHECKBOX_SHOW_THE_ANNOUNCEMENT = By.cssSelector("[data-testid='addEditProjectShowAnnouncement']");
@@ -82,11 +84,14 @@ public class AddProjectPage extends BasePage {
     @Step("Creating project '{projectName}' with announcement: '{project.announcement}' and type: '{project.projectType}'")
     public void addProject(Project project)
     {
+        log.info("Setting up project '{}'", project.getName());
         new InputDecorator(driver, NAME_PROJECT_INPUT).setValue(project.getName());
+        log.info("Setting up announcement '{}'", project.getAnnouncement());
         new TextAreaDecorator(driver, TEXT_IN_ANNOUNCEMENT_AREA).setValue(project.getAnnouncement());
         if (project.isShowAnnouncement()) {
             checkCheckboxShowTheAnnouncement();
         }
+        log.info("Setting up type of project '{}'", project.getProjectType().getName());
         new RadioButtonDecorator(driver, project.getProjectType().getDataTestId()).select();
         if (project.isEnableTestCaseApprovals()) {
             checkCheckboxEnableTestCaseApprovals();
