@@ -38,4 +38,9 @@ public class InputDecorator extends ElementDecorator {
     {
         this.element.getAttribute("value");
     }
+
+    public void setValue(String value)
+    {
+        this.element.sendKeys(value);
+    }
 }

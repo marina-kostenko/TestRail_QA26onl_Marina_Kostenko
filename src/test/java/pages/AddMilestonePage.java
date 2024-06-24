@@ -5,6 +5,7 @@ import decorators.CheckboxDecorator;
 import decorators.InputDecorator;
 import decorators.TextAreaDecorator;
 import io.qameta.allure.Step;
+import models.Milestone;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,6 +15,8 @@ public class AddMilestonePage extends BasePage {
     private final String milestoneNameInput = "addEditMilestoneName";
     private final String milestoneReferenceInput = "addEditMilestoneReference";
     private final String sectionDescriptionTextArea = "editSectionDescription";
+    private final String startDateInput = "addEditMilestoneStartOn";
+    private final String endDateInput = "addEditMilestoneDueOn";
     private final String thisMilestoneIsCompletedCheckbox = "addEditMilestoneIsCompleted";
     private final String addMilestoneButton = "milestoneButtonOk";
 
@@ -56,6 +59,19 @@ public class AddMilestonePage extends BasePage {
     public void clickAddMilestoneButton()
     {
         new ButtonDecorator(driver, this.addMilestoneButton).click();
+    }
+
+    public void addMilestone(Milestone milestone)
+    {
+        new InputDecorator(driver, this.milestoneNameInput).setValue(milestone.getName());
+        new InputDecorator(driver, this.milestoneReferenceInput).setValue(milestone.getReferences());
+        new TextAreaDecorator(driver, this.sectionDescriptionTextArea).setValue(milestone.getDescription());
+        new InputDecorator(driver, this.startDateInput).setValue(milestone.getStartDate());
+        new InputDecorator(driver, this.endDateInput).setValue(milestone.getEndDate());
+        if (milestone.isMilestoneCompleted()) {
+            checkCheckboxThisMilestoneIsCompleted();
+        }
+        clickAddMilestoneButton();
     }
 }
 
