@@ -7,15 +7,16 @@ import org.testng.annotations.*;
 import pages.*;
 import utils.DriverFactory;
 import utils.InvokedListener;
+import utils.PropertyReader;
 import utils.TestListener;
 
 import java.time.Duration;
 
 @Listeners({InvokedListener.class, TestListener.class})
 public abstract class BaseTest {
-    protected static final String BASE_URL = "https://tmsqa26online2024new.testrail.io/";
-    protected static final String BASE_LOGIN = "tmsqa26marina@mailinator.com";
-    protected static final String BASE_PASSWORD = "xl#H3R0Vu0";
+    protected static final String BASE_URL = PropertyReader.getProperty("url");
+    protected static final String BASE_LOGIN = PropertyReader.getProperty("login");
+    protected static final String BASE_PASSWORD = PropertyReader.getProperty("password");
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected LoginPage loginPage;
@@ -35,7 +36,7 @@ public abstract class BaseTest {
     @Parameters({"browserName"})
     public void setUp(@Optional("chrome") String browser, ITestContext testContext) throws Exception
     {
-        driver = DriverFactory.getDriver(browser);
+        driver = DriverFactory.getDriver(PropertyReader.getProperty("browser"));
         testContext.setAttribute("driver", driver);
         driver.get(BASE_URL);
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));

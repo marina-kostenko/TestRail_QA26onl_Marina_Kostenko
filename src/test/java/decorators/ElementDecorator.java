@@ -1,10 +1,12 @@
 package decorators;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Log4j2
 public class ElementDecorator implements WebElement {
 
     protected WebElement element;
@@ -36,8 +38,10 @@ public class ElementDecorator implements WebElement {
     public void click()
     {
         try {
+            log.info("Clicking element: {}", this.element.getText());
             element.click();
         } catch (ElementNotInteractableException exception) {
+            log.debug("Element {} not interactable, trying with scrollIntoView", this.element.getText());
             scrollIntoView();
             element.click();
         }
